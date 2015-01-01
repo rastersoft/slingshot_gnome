@@ -31,4 +31,4 @@ window theme to the elementary ones.
 
 Created by Raster Software Vigo (rastersoft)
 http://www.rastersoft.com
-https://github.com/rastersoft/slingshot_app_launcher
+https://github.com/rastersoft/slingshot_gnome
