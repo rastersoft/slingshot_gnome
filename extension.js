@@ -3,22 +3,21 @@
 /***************************************************
  *           SlingShot for Gnome Shell             *
  *                                                 *
- * A clone of SlingShot launcher from ElementaryOS *
+ * Allows to launch SlingShot launcher from        *
+ * ElementaryOS under Gnome Shell                  *
  *                                                 *
  * Created by rastersoft, and distributed under    *
  * GPLv2 or later license.                         *
- *                                                 *
- * Code based on Applications Menu, from gcampax   *
  *                                                 *
  ***************************************************/
 
 /* Versions:
 
      1: First public version
+     2: Cleaned the code
     
 */
 
-const ShellVersion = imports.misc.config.PACKAGE_VERSION.split(".");
 const Lang = imports.lang;
 const St = imports.gi.St;
 
@@ -27,12 +26,12 @@ const PanelMenu = imports.ui.panelMenu;
 const Util = imports.misc.util;
 
 const LauncherButton = new Lang.Class({
-    Name: 'SlingShot.LauncherButton',
+    Name: 'SlingShot_Gnome.LauncherButton',
     Extends: PanelMenu.Button,
 
     _init: function() {
 
-        this.parent(0.0,'SlingShot');
+        this.parent(0.0,'SlingShot_Gnome');
         this.actor.add_style_class_name('panel-status-button');
         this._box = new St.BoxLayout({ style_class: 'panel-status-button-box' });
         this.actor.add_actor(this._box);
@@ -42,10 +41,17 @@ const LauncherButton = new Lang.Class({
         this._box.add_actor(this.buttonIcon);*/
         this.buttonLabel = new St.Label({ text: _("Applications")});
         this._box.add_actor(this.buttonLabel);
+
         this._setActivitiesNoVisible(true);
+
+        // When the user clicks in the Application button, launch slingshot-launcher
+        // to show it
         this.actor.connect('button-release-event', function(element,event) {
             Util.spawn(['slingshot-launcher'])
         });
+        // At startup, prelaunch slingshot to make it faster the first time the
+        // user wants it (slingshot will remain in background, and the new
+        // launches will just instruct it to show, instead of being reloaded
         Util.spawn(['slingshot-launcher', '-s'])
     },
 
@@ -57,21 +63,13 @@ const LauncherButton = new Lang.Class({
     _setActivitiesNoVisible: function(mode) {
         this._activitiesNoVisible=mode;
         if (mode) {
-            if (ShellVersion[1]>4) {
-                let indicator = Main.panel.statusArea['activities'];
-                if(indicator != null)
-                    indicator.container.hide();
-            } else {
-                Main.panel._activitiesButton.actor.hide();
-            }
+            let indicator = Main.panel.statusArea['activities'];
+            if(indicator != null)
+                indicator.container.hide();
         } else {
-            if (ShellVersion[1]>4) {
-                let indicator = Main.panel.statusArea['activities'];
-                if(indicator != null)
-                    indicator.container.show();
-            } else {
-                Main.panel._activitiesButton.actor.show();
-            }
+            let indicator = Main.panel.statusArea['activities'];
+            if(indicator != null)
+                indicator.container.show();
         }
     },
 
@@ -81,14 +79,7 @@ let SlingShotButton;
 
 function enable() {
     SlingShotButton = new LauncherButton();
-    let pos=0;
-
-    if (ShellVersion[1]>4) {
-        Main.panel.addToStatusArea('slingshot-menu', SlingShotButton, 0, 'left');
-    } else {
-        Main.panel._leftBox.insert_child_at_index(SlingShotButton.actor,0);
-        Main.panel._menus.addMenu(SlingShotButton.menu);
-    }
+    Main.panel.addToStatusArea('slingshot-menu', SlingShotButton, 0, 'left');
 }
 
 function disable() {

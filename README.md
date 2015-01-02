@@ -17,6 +17,10 @@ installed Slingshot Launcher. Under Ubuntu is as easy as type
         sudo apt-get update
         sudo apt-get install slingshot-launcher gala
 
+It is mandatory to also install the 'gala' window manager, even if it is
+not used, because slingtshot needs some dconf files from it, but has a
+bug in the dependencies list.
+
 Maybe you will want to also install 'plank', 'elementary-icon-theme' and
 'elementary-theme' packages to have a full Pantheon experience under Gnome
 Shell. To ensure that your system uses the elementary themes, just install
@@ -29,6 +33,6 @@ window theme to the elementary ones.
 
 ## Contacting the author
 
-Created by Raster Software Vigo (rastersoft)
-http://www.rastersoft.com
-https://github.com/rastersoft/slingshot_gnome
+Created by Raster Software Vigo (rastersoft) 
+http://www.rastersoft.com 
+https://github.com/rastersoft/slingshot_gnome 
