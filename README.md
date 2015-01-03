@@ -30,6 +30,7 @@ window theme to the elementary ones.
 ## History of versions:
 
     1: First public version
+    2: Source code cleaned
 
 ## Contacting the author
 
