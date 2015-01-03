@@ -25,7 +25,25 @@ Maybe you will want to also install 'plank', 'elementary-icon-theme' and
 'elementary-theme' packages to have a full Pantheon experience under Gnome
 Shell. To ensure that your system uses the elementary themes, just install
 also the 'gnome-tweak-tool' package and use it to set the icons, gtk theme and
-window theme to the elementary ones.
+window theme to the elementary ones. Also, if you are using Ubuntu, don't forget
+to run
+
+        sudo su
+        echo "export LIBOVERLAY_SCROLLBAR=0" > /etc/X11/Xsession.d/80overlayscrollbars
+        exit
+
+This will disable the overlay scrollbars and also fix a bug with the colors in
+GTK.
+
+In other distros, you should try to find a repository with those packages. If
+it doesn't exist, you must compile them from source code. These are the programs
+you have to compile:
+
+    * slingshot-launcher
+    * gala
+    * plank
+    * elementary-icon-theme
+    * elementary-theme
 
 ## History of versions:
 
