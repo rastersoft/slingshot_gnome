@@ -15,7 +15,8 @@
 
      1: First public version
      2: Cleaned the code
-    
+     3: Vertical align of the Applications text (thanks to Ov3rlo4d)
+
 */
 const Clutter = imports.gi.Clutter;
 
