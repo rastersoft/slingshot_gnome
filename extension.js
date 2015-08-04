@@ -17,6 +17,7 @@
      2: Cleaned the code
     
 */
+const Clutter = imports.gi.Clutter;
 
 const Lang = imports.lang;
 const St = imports.gi.St;
@@ -39,7 +40,10 @@ const LauncherButton = new Lang.Class({
         /*this.buttonIcon = new St.Icon({ gicon: null, style_class: 'system-status-icon' });
         this.buttonIcon.icon_name='start-here';
         this._box.add_actor(this.buttonIcon);*/
-        this.buttonLabel = new St.Label({ text: _("Applications")});
+        this.buttonLabel = new St.Label({ text: _("Applications"),
+                                              y_expand: true,
+                                              y_align: Clutter.ActorAlign.CENTER });
+
         this._box.add_actor(this.buttonLabel);
 
         this._setActivitiesNoVisible(true);
